@@ -1,0 +1,6 @@
+{
+  "name": "Make It 24 Game",
+  "description": "Permainan matematika interaktif 24 dengan mode Angka Normal dan Kartu Remi, dilengkapi dengan Solver Engine instan dan Safe Expression Parser.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
