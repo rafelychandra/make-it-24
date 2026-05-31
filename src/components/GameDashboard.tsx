@@ -107,7 +107,14 @@ export default function GameDashboard() {
   const [feedbackType, setFeedbackType] = useState<'win' | 'fail' | 'timeout' | 'no-sol-correct' | 'no-sol-wrong'>('win');
   const [feedbackTitle, setFeedbackTitle] = useState<string>('');
   const [feedbackMessage, setFeedbackMessage] = useState<string>('');
-  const [showHowToModal, setShowHowToModal] = useState<boolean>(false);
+  const [showHowToModal, setShowHowToModal] = useState<boolean>(() => {
+    const hasVisited = localStorage.getItem('make24_visited');
+    if (!hasVisited) {
+      localStorage.setItem('make24_visited', 'true');
+      return true;
+    }
+    return false;
+  });
 
   // Logs / History list
   const [history, setHistory] = useState<HistoryItem[]>(() => {
@@ -192,7 +199,7 @@ export default function GameDashboard() {
 
   // Timer Logic
   useEffect(() => {
-    if (!timerActive) {
+    if (!timerActive || showHowToModal) {
       if (timerRef.current) clearInterval(timerRef.current);
       return;
     }
@@ -215,7 +222,7 @@ export default function GameDashboard() {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [timerActive, triggerSound]);
+  }, [timerActive, triggerSound, showHowToModal]);
 
   // Handle timeout condition
   const handleRoundTimeout = () => {
@@ -685,10 +692,12 @@ export default function GameDashboard() {
         {showFeedbackModal && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             <motion.div
-              className="absolute inset-0 bg-slate-950/85 backdrop-blur"
+              className="absolute inset-0 bg-slate-950/85 backdrop-blur cursor-pointer"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              onClick={() => setShowFeedbackModal(false)}
+              title="Ketuk untuk menutup"
             />
 
             <motion.div
@@ -699,16 +708,34 @@ export default function GameDashboard() {
               exit={{ scale: 0.9, y: 20, opacity: 0 }}
               transition={{ type: 'spring', duration: 0.4 }}
             >
+              {/* Close Button "✕" at Top Right to exit */}
+              <button
+                onClick={() => setShowFeedbackModal(false)}
+                className="absolute top-4 right-4 text-slate-450 hover:text-white font-bold p-1 rounded-lg cursor-pointer transition-colors"
+                title="Tutup halaman"
+                id="btn-feedback-modal-close"
+              >
+                ✕
+              </button>
+
               {/* Dynamic Trophy/Error Icons */}
               <div className="flex justify-center mb-4">
                 {feedbackType === 'win' || feedbackType === 'no-sol-correct' ? (
-                  <div className="w-16 h-16 rounded-full bg-indigo-950/30 border border-indigo-500/20 flex items-center justify-center animate-bounce">
+                  <button
+                    onClick={() => setShowFeedbackModal(false)}
+                    title="Tutup halaman"
+                    className="w-16 h-16 rounded-full bg-indigo-955/35 border border-indigo-500/20 flex items-center justify-center animate-bounce cursor-pointer hover:scale-110 active:scale-95 transition-all outline-none hover:bg-indigo-900/45 hover:border-indigo-500/40"
+                  >
                     <Trophy className="w-8 h-8 text-indigo-405" />
-                  </div>
+                  </button>
                 ) : (
-                  <div className="w-16 h-16 rounded-full bg-rose-955/20 border border-rose-900/30 flex items-center justify-center animate-pulse">
+                  <button
+                    onClick={() => setShowFeedbackModal(false)}
+                    title="Tutup halaman"
+                    className="w-16 h-16 rounded-full bg-rose-955/20 border border-rose-900/30 flex items-center justify-center animate-pulse cursor-pointer hover:scale-110 active:scale-95 transition-all outline-none hover:bg-rose-950/30 hover:border-rose-500/40"
+                  >
                     <XCircle className="w-8 h-8 text-rose-455" />
-                  </div>
+                  </button>
                 )}
               </div>
 
