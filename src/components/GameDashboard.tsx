@@ -238,7 +238,7 @@ export default function GameDashboard() {
     setShowFeedbackModal(true);
 
     const loggedItem: HistoryItem = {
-      id: `history-${Date.now()}`,
+      id: `history-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
       timestamp: Date.now(),
       mode,
       numbers,
@@ -322,7 +322,7 @@ export default function GameDashboard() {
         setShowFeedbackModal(true);
 
         const loggedItem: HistoryItem = {
-          id: `history-${Date.now()}`,
+          id: `history-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
           timestamp: Date.now(),
           mode,
           numbers: targetSet,
@@ -344,7 +344,7 @@ export default function GameDashboard() {
         setShowFeedbackModal(true);
 
         const loggedItem: HistoryItem = {
-          id: `history-${Date.now()}`,
+          id: `history-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
           timestamp: Date.now(),
           mode,
           numbers: targetSet,
@@ -384,7 +384,7 @@ export default function GameDashboard() {
       setShowFeedbackModal(true);
 
       const loggedItem: HistoryItem = {
-        id: `history-${Date.now()}`,
+        id: `history-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
         timestamp: Date.now(),
         mode,
         numbers: targetSet,
@@ -405,7 +405,7 @@ export default function GameDashboard() {
       setShowFeedbackModal(true);
 
       const loggedItem: HistoryItem = {
-        id: `history-${Date.now()}`,
+        id: `history-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
         timestamp: Date.now(),
         mode,
         numbers: targetSet,
