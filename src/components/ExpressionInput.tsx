@@ -45,9 +45,9 @@ export default function ExpressionInput({
       // Only set error if it's not a trivial incomplete state
       if (
         result.error &&
-        !result.error.includes('Silakan masukkan') &&
-        !result.error.includes('Formula terputus') &&
-        !result.error.includes('buntu')
+        !result.error.includes('Please enter') &&
+        !result.error.includes('Incomplete formula') &&
+        !result.error.includes('dangling')
       ) {
         setLiveError(result.error);
       } else {
@@ -94,11 +94,11 @@ export default function ExpressionInput({
           </span>
           {isEquationPerfect ? (
             <span className="text-[10px] bg-indigo-500/20 text-indigo-300 font-extrabold border border-indigo-500/30 px-2 py-0.5 rounded-full animate-pulse font-mono uppercase tracking-wider">
-              Siap Dikirim (Tepat 24!)
+              Ready to Submit (Exact 24!)
             </span>
           ) : (
             <span className="text-[10px] bg-slate-800/40 text-slate-400 font-mono border border-slate-800/30 px-2 py-0.5 rounded-full">
-              Kalkulasi Aktif
+              Calculating
             </span>
           )}
         </div>
@@ -112,7 +112,7 @@ export default function ExpressionInput({
             onChange={(e) => onExpressionChange(e.target.value)}
             onKeyDown={handleKeyDown}
             disabled={disabled}
-            placeholder="Ketik atau klik angka & operator..."
+            placeholder="Type or click numbers & operators..."
             autoComplete="off"
             className="bg-transparent text-xl sm:text-2xl font-mono font-bold w-full focus:outline-none select-text text-white placeholder-slate-600 tracking-wide"
           />
@@ -122,7 +122,7 @@ export default function ExpressionInput({
               id="clear-icon-btn"
               onClick={handleClear}
               className="text-slate-500 hover:text-rose-400 hover:bg-rose-955/20 border border-transparent hover:border-rose-900/40 p-1.5 rounded-xl transition duration-150"
-              title="Reset Input"
+              title="Clear Input"
             >
               <RotateCcw className="w-5 h-5" />
             </button>
@@ -132,7 +132,7 @@ export default function ExpressionInput({
         {/* Live Calculation Evaluator Display */}
         <div className="border-t border-slate-800/80 pt-3 flex flex-wrap items-center justify-between text-sm min-h-10">
           <div className="flex items-center gap-2">
-            <span className="text-slate-400 font-medium">Hasil saat ini:</span>
+            <span className="text-slate-400 font-medium">Current Result:</span>
             {liveValue !== null ? (
               <span
                 id="live-calc-display"
@@ -198,7 +198,7 @@ export default function ExpressionInput({
           className="col-span-2 flex items-center justify-center gap-1 h-12 bg-rose-955/10 hover:bg-rose-955/35 text-rose-400 hover:text-rose-350 font-bold border border-rose-900/30 hover:border-rose-800 rounded-xl transition shadow-sm cursor-pointer"
         >
           <Delete className="w-4 h-4" />
-          <span className="text-xs font-mono uppercase tracking-wider">Hapus</span>
+          <span className="text-xs font-mono uppercase tracking-wider">Del</span>
         </button>
       </div>
     </div>

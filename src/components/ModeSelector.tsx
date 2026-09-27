@@ -25,9 +25,9 @@ export default function ModeSelector({ currentMode, onModeChange, disabled }: Mo
       >
         <Hash className={`w-5 h-5 ${currentMode === 'NORMAL' ? 'text-indigo-400' : 'text-slate-500'}`} />
         <div className="text-left">
-          <div className="font-bold text-sm tracking-wide">Angka Normal</div>
+          <div className="font-bold text-sm tracking-wide">Normal Numbers</div>
           <div className={`text-[10px] uppercase font-mono ${currentMode === 'NORMAL' ? 'text-indigo-300/80' : 'text-slate-500'}`}>
-            Mulai 1 s.d 10
+            Numbers 1 to 10
           </div>
         </div>
         {currentMode === 'NORMAL' && (
@@ -53,7 +53,7 @@ export default function ModeSelector({ currentMode, onModeChange, disabled }: Mo
       >
         <Club className={`w-5 h-5 ${currentMode === 'CARDS' ? 'text-indigo-400' : 'text-slate-500'}`} />
         <div className="text-left">
-          <div className="font-bold text-sm tracking-wide">Kartu Remi</div>
+          <div className="font-bold text-sm tracking-wide">Playing Cards</div>
           <div className={`text-[10px] uppercase font-mono ${currentMode === 'CARDS' ? 'text-indigo-300/80' : 'text-slate-500'}`}>
             Standard Playing Cards
           </div>

@@ -229,11 +229,11 @@ export default function GameDashboard() {
     triggerSound('fail');
     setStreak(0);
     setFeedbackType('timeout');
-    setFeedbackTitle('Waktu Habis!');
+    setFeedbackTitle("Time's Up!");
     setFeedbackMessage(
       solverResult
-        ? `Waktu 60 detik telah berlalu. Salah satu solusi yang memungkinkan adalah: ${solverResult}`
-        : 'Waktu habis dan set angka ini memang tidak memiliki solusi sama sekali!'
+        ? `60 seconds have passed. One possible valid solution was: ${solverResult}`
+        : 'Time is up, and this set of numbers indeed has no mathematical solution!'
     );
     setShowFeedbackModal(true);
 
@@ -317,8 +317,8 @@ export default function GameDashboard() {
         setScore((prev) => prev + 10);
         setStreak((prev) => prev + 1);
         setFeedbackType('win');
-        setFeedbackTitle('Luar Biasa!');
-        setFeedbackMessage(`Jawaban Anda BENAR! Formula "${expression}" berhasil menghasilkan nilai tepat 24.`);
+        setFeedbackTitle('Excellent!');
+        setFeedbackMessage(`Correct answer! The formula "${expression}" successfully equals 24.`);
         setShowFeedbackModal(true);
 
         const loggedItem: HistoryItem = {
@@ -336,10 +336,10 @@ export default function GameDashboard() {
         triggerSound('fail');
         setStreak(0);
         setFeedbackType('fail');
-        setFeedbackTitle('Belum Tepat!');
+        setFeedbackTitle('Not Quite!');
         const textVal = Number.isInteger(result.value) ? result.value : result.value.toFixed(2);
         setFeedbackMessage(
-          `Hasil dari formula Anda adalah ${textVal} (Bukan 24). Silakan coba lagi atau acak angka baru.`
+          `Your formula evaluates to ${textVal} (not 24). Please try again or draw a new deal.`
         );
         setShowFeedbackModal(true);
 
@@ -358,8 +358,8 @@ export default function GameDashboard() {
       // Parser error / Syntax failure
       triggerSound('fail');
       setFeedbackType('fail');
-      setFeedbackTitle('Format Formula Salah!');
-      setFeedbackMessage(result.error || 'Terjadi kesalahan pada rumus matematika Anda.');
+      setFeedbackTitle('Invalid Formula Format!');
+      setFeedbackMessage(result.error || 'An error occurred in your mathematical formula.');
       setShowFeedbackModal(true);
     }
   };
@@ -377,9 +377,9 @@ export default function GameDashboard() {
       setScore((prev) => prev + 15); // Extra reward for difficult no solution detection
       setStreak((prev) => prev + 1);
       setFeedbackType('no-sol-correct');
-      setFeedbackTitle('Sangat Jenius!');
+      setFeedbackTitle('Brilliant!');
       setFeedbackMessage(
-        `Benar sekali! Keempat angka (${targetSet.join(', ')}) memang tidak memiliki solusi matematika untuk dibuat menjadi 24.`
+        `Correct! The four numbers (${targetSet.join(', ')}) indeed have no mathematical solution to reach 24.`
       );
       setShowFeedbackModal(true);
 
@@ -388,7 +388,7 @@ export default function GameDashboard() {
         timestamp: Date.now(),
         mode,
         numbers: targetSet,
-        expression: 'TIDAK ADA SOLUSI',
+        expression: 'NO SOLUTION',
         success: true,
         type: 'no-solution-passed',
       };
@@ -398,9 +398,9 @@ export default function GameDashboard() {
       triggerSound('fail');
       setStreak(0);
       setFeedbackType('no-sol-wrong');
-      setFeedbackTitle('Kurang Teliti!');
+      setFeedbackTitle('Not Quite!');
       setFeedbackMessage(
-        `Ternyata kombinasi angka (${targetSet.join(', ')}) memiliki setidaknya satu solusi valid! Contohnya: ${solverResult}`
+        `Turns out the combination (${targetSet.join(', ')}) has at least one valid solution! For example: ${solverResult}`
       );
       setShowFeedbackModal(true);
 
@@ -409,7 +409,7 @@ export default function GameDashboard() {
         timestamp: Date.now(),
         mode,
         numbers: targetSet,
-        expression: 'TIDAK ADA SOLUSI (SALAH)',
+        expression: 'NO SOLUTION (WRONG)',
         success: false,
         type: 'no-solution-failed',
       };
@@ -458,7 +458,7 @@ export default function GameDashboard() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSoundEnabled(!soundEnabled)}
-              title={soundEnabled ? 'Matikan Suara' : 'Aktifkan Suara'}
+              title={soundEnabled ? 'Mute Audio' : 'Unmute Audio'}
               className="p-2.5 rounded-xl border border-slate-805 bg-slate-900 hover:bg-slate-805 text-slate-455 hover:text-white transition cursor-pointer"
             >
               {soundEnabled ? <Volume2 className="w-4.5 h-4.5" /> : <VolumeX className="w-4.5 h-4.5" />}
@@ -470,7 +470,7 @@ export default function GameDashboard() {
               className="flex items-center gap-1.5 px-3.5 py-2 font-bold font-mono text-[11px] uppercase tracking-wider border border-slate-800 rounded-xl bg-slate-900 hover:bg-slate-805 hover:border-indigo-500/40 text-slate-300 transition cursor-pointer"
             >
               <BookOpen className="w-3.5 h-3.5 text-indigo-400" />
-              Cara Bermain
+              How to Play
             </button>
           </div>
         </div>
@@ -485,13 +485,13 @@ export default function GameDashboard() {
             
             <h3 className="font-bold font-mono text-[10px] uppercase text-slate-400 tracking-widest mb-4 flex items-center gap-1.5">
               <TrendingUp className="w-3.5 h-3.5 text-indigo-400" />
-              Statistik Game
+              Game Stats
             </h3>
 
             {/* Score item */}
             <div className="grid grid-cols-2 gap-3">
               <div className="bg-slate-950 p-4 rounded-2xl border border-slate-850/85">
-                <span className="text-[9px] text-slate-500 block uppercase font-mono font-bold tracking-wider">Skor</span>
+                <span className="text-[9px] text-slate-500 block uppercase font-mono font-bold tracking-wider">Score</span>
                 <span id="score-counter" className="text-3xl font-black font-mono text-indigo-405">
                   {score}
                 </span>
@@ -513,9 +513,9 @@ export default function GameDashboard() {
 
             {/* Best Score Memory info */}
             <div className="mt-4 pt-4 border-t border-slate-805/60 flex justify-between text-xs text-slate-400">
-              <span className="font-mono text-[9px] uppercase tracking-wider">Terbaik:</span>
+              <span className="font-mono text-[9px] uppercase tracking-wider">Best:</span>
               <span id="best-streak-display" className="font-bold text-slate-200 font-mono">
-                {bestStreak} Ronde
+                {bestStreak} Rounds
               </span>
             </div>
 
@@ -523,14 +523,14 @@ export default function GameDashboard() {
             <div className="mt-5">
               <button
                 onClick={() => {
-                  if (confirm('Konfirmasi reset seluruh statistik skor dan history bermain?')) {
+                  if (confirm('Reset all score statistics and gameplay history?')) {
                     resetAllStats();
                   }
                 }}
                 className="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-xl text-[9px] font-bold font-mono uppercase tracking-wider text-slate-500 hover:text-rose-455 hover:bg-rose-955/20 border border-slate-800 border-dashed transition cursor-pointer"
               >
                 <RotateCcw className="w-3 h-3" />
-                Reset Semua Data
+                Reset All Stats
               </button>
             </div>
           </div>
@@ -542,7 +542,7 @@ export default function GameDashboard() {
                 <Clock className={`w-5 h-5 ${timer <= 10 ? 'text-rose-500' : 'text-indigo-400'}`} />
               </div>
               <div>
-                <span className="text-[9px] text-slate-505 block font-bold font-mono uppercase tracking-wider">Sisa Waktu</span>
+                <span className="text-[9px] text-slate-505 block font-bold font-mono uppercase tracking-wider">Time Left</span>
                 <span
                   id="timer-countdown"
                   className={`text-2xl font-black font-mono leading-none ${timer <= 10 ? 'text-rose-455 animate-pulse' : 'text-slate-250'}`}
@@ -583,10 +583,10 @@ export default function GameDashboard() {
             {/* Stage title */}
             <div className="text-center max-w-md mx-auto mb-4">
               <h2 className="font-black text-xl text-slate-100 tracking-wide">
-                Susun Angka Menjadi 24
+                Make It 24
               </h2>
               <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-                Gunakan keempat angka di bawah dengan operator matematika (+, -, *, /) tepat satu kali demi meraih nilai akhir 24.
+                Combine all four numbers below using basic math operators (+, -, *, /) exactly once to equal 24.
               </p>
             </div>
 
@@ -636,7 +636,7 @@ export default function GameDashboard() {
             <div className="bg-slate-905 border border-slate-850 rounded-3xl p-6 shadow-2xl">
               <h3 className="font-bold font-mono text-[10px] uppercase text-slate-400 tracking-widest mb-4 flex items-center gap-1.5">
                 <History className="w-3.5 h-3.5 text-indigo-400" />
-                Riwayat Bermain (Ronde Sebelumnya)
+                Game History (Previous Rounds)
               </h3>
 
               <div id="history-scroll-box" className="max-h-56 overflow-y-auto space-y-2 pr-1">
@@ -650,7 +650,7 @@ export default function GameDashboard() {
                         [ {item.numbers.join(', ')} ]
                       </span>
                       <span className="text-[9px] text-slate-500 font-mono uppercase tracking-wider">
-                        {item.mode === 'NORMAL' ? 'Normal' : 'Remi'} • {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                        {item.mode === 'NORMAL' ? 'Normal' : 'Cards'} • {new Date(item.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </span>
                     </div>
 
@@ -665,7 +665,7 @@ export default function GameDashboard() {
                             : 'bg-rose-955/20 text-rose-455 border border-rose-900/30'
                         }`}
                       >
-                        {item.success ? 'Berhasil' : 'Gagal'}
+                        {item.success ? 'Success' : 'Failed'}
                       </span>
                     </div>
                   </div>
@@ -697,7 +697,7 @@ export default function GameDashboard() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowFeedbackModal(false)}
-              title="Ketuk untuk menutup"
+              title="Click to dismiss"
             />
 
             <motion.div
@@ -712,7 +712,7 @@ export default function GameDashboard() {
               <button
                 onClick={() => setShowFeedbackModal(false)}
                 className="absolute top-4 right-4 text-slate-450 hover:text-white font-bold p-1 rounded-lg cursor-pointer transition-colors"
-                title="Tutup halaman"
+                title="Close"
                 id="btn-feedback-modal-close"
               >
                 ✕
@@ -723,7 +723,7 @@ export default function GameDashboard() {
                 {feedbackType === 'win' || feedbackType === 'no-sol-correct' ? (
                   <button
                     onClick={() => setShowFeedbackModal(false)}
-                    title="Tutup halaman"
+                    title="Close"
                     className="w-16 h-16 rounded-full bg-indigo-955/35 border border-indigo-500/20 flex items-center justify-center animate-bounce cursor-pointer hover:scale-110 active:scale-95 transition-all outline-none hover:bg-indigo-900/45 hover:border-indigo-500/40"
                   >
                     <Trophy className="w-8 h-8 text-indigo-405" />
@@ -731,7 +731,7 @@ export default function GameDashboard() {
                 ) : (
                   <button
                     onClick={() => setShowFeedbackModal(false)}
-                    title="Tutup halaman"
+                    title="Close"
                     className="w-16 h-16 rounded-full bg-rose-955/20 border border-rose-900/30 flex items-center justify-center animate-pulse cursor-pointer hover:scale-110 active:scale-95 transition-all outline-none hover:bg-rose-950/30 hover:border-rose-500/40"
                   >
                     <XCircle className="w-8 h-8 text-rose-455" />
@@ -752,12 +752,12 @@ export default function GameDashboard() {
                 {(feedbackType === 'win' || feedbackType === 'no-sol-correct') ? (
                   <>
                     <span className="text-indigo-400 font-extrabold">+ {feedbackType === 'no-sol-correct' ? '15' : '10'}</span>
-                    <span>SKOR BERHASIL</span>
+                    <span>SUCCESS</span>
                   </>
                 ) : (
                   <>
                     <span className="text-rose-455 font-extrabold">0 / STREAK RESET</span>
-                    <span>SKOR GAGAL</span>
+                    <span>FAILED</span>
                   </>
                 )}
               </div>
@@ -768,7 +768,7 @@ export default function GameDashboard() {
                   onClick={() => generateNewRound()}
                   className="w-full py-3.5 px-6 rounded-2xl bg-indigo-650 hover:bg-indigo-600 text-white font-extrabold text-sm tracking-wider uppercase font-mono shadow-lg shadow-indigo-900/20 transition cursor-pointer"
                 >
-                  Mulai Ronde Selanjutnya
+                  Next Round
                 </button>
               </div>
             </motion.div>
@@ -798,7 +798,7 @@ export default function GameDashboard() {
                 <div className="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
                   <h3 className="text-lg font-black text-slate-100 flex items-center gap-1.5 uppercase font-mono tracking-wider">
                     <BookOpen className="w-5 h-5 text-indigo-400" />
-                    Misi Utama Make It 24
+                    How to Play Make It 24
                   </h3>
                   <button
                     onClick={() => setShowHowToModal(false)}
@@ -810,35 +810,35 @@ export default function GameDashboard() {
 
                 <div className="text-xs sm:text-sm text-slate-305 space-y-3.5 leading-relaxed font-sans">
                   <p>
-                    <strong>Make It 24</strong> adalah permainan asah otak matematika klasik. Tujuan utama Anda adalah menyusun formula matematika dari 4 angka acak yang tersedia sehingga menghasilkan kalkulasi tepat <strong>24</strong>.
+                    <strong>Make It 24</strong> is a classic math brain teaser. Your goal is to combine the 4 given numbers using basic arithmetic operations so that the final calculation equals exactly <strong>24</strong>.
                   </p>
 
                   <div className="space-y-1.5 pl-2 border-l-2 border-indigo-500">
                     <p>
-                      <strong>1. Aturan Angka:</strong> Anda wajib menggunakan keempat angka/kartu di layar <strong>tepat satu kali</strong>. Tidak kurang, tidak lebih.
+                      <strong>1. Number Rules:</strong> You must use all four numbers/cards on screen <strong>exactly once</strong>. No more, no less.
                     </p>
                     <p>
-                      <strong>2. Operasi Aritmatika:</strong> Anda boleh menggunakan simbol penjumlahan (<code>+</code>), pengurangan (<code>-</code>), perkalian (<code>*</code>), pembagian (<code>/</code>), dan tanda kurung (<code>()</code>).
+                      <strong>2. Arithmetic Operations:</strong> You can use addition (<code>+</code>), subtraction (<code>-</code>), multiplication (<code>*</code>), division (<code>/</code>), and parentheses (<code>()</code>).
                     </p>
                     <p>
-                      <strong>3. Kartu Remi (Playing Cards):</strong> Pada mode ini, nilai kartu didefinisikan sebagai: <code>A = 1</code>, <code>J = 11</code>, <code>Q = 12</code>, <code>K = 13</code>.
+                      <strong>3. Playing Cards:</strong> In Cards mode, face cards have standard values: <code>A = 1</code>, <code>J = 11</code>, <code>Q = 12</code>, <code>K = 13</code>.
                     </p>
                   </div>
 
                   <div className="bg-slate-950 p-3.5 border border-slate-850 rounded-xl font-mono text-xs text-slate-450">
-                    <strong>Contoh Tangan:</strong> [3, 3, 8, 8] <br />
-                    <strong>Solusi valid:</strong> 8 / (3 - (8 / 3)) <br />
-                    <strong>Penjelasan:</strong> 8 dibagi (3 dikurangi 8/3) = 8 / (1/3) = 24.
+                    <strong>Example Hand:</strong> [3, 3, 8, 8] <br />
+                    <strong>Valid Solution:</strong> 8 / (3 - (8 / 3)) <br />
+                    <strong>Explanation:</strong> 8 divided by (3 minus 8/3) = 8 / (1/3) = 24.
                   </div>
 
                   <p>
-                    <strong>Tombol "Tidak Bisa Dihitung" (No Solution):</strong> <br />
-                    Ada beberapa kombinasi angka yang secara matematis tidak memiliki solusi (misalnya <code>1, 1, 1, 1</code>). Jika Anda buntu dan yakin tidak ada formula yang bisa menghasilkan 24, ketuk tombol <strong>Tidak Bisa Dihitung</strong>. 
+                    <strong>"No Solution" Button:</strong> <br />
+                    Some number combinations mathematically cannot produce 24 (for example <code>1, 1, 1, 1</code>). If you are stuck and convinced there is no valid formula, click the <strong>No Solution</strong> button.
                   </p>
                   
                   <div className="text-xs text-amber-350 bg-amber-955/15 p-3 rounded-xl border border-amber-900/20">
-                    • Tebakan benar <strong>Tidak Bisa Dihitung</strong> bernilai +15 poin! <br />
-                    • Namun jika ternyata ada solusi valid, Anda gagal dan streak Anda akan ter-reset.
+                    • Correctly identifying <strong>No Solution</strong> awards +15 points! <br />
+                    • However, if a valid solution exists, you fail and your streak resets.
                   </div>
                 </div>
 
@@ -847,7 +847,7 @@ export default function GameDashboard() {
                     onClick={() => setShowHowToModal(false)}
                     className="w-full py-3.5 rounded-xl bg-indigo-650 hover:bg-indigo-600 text-white font-bold text-xs uppercase font-mono tracking-wider transition cursor-pointer text-center"
                   >
-                    Saya Mengerti, Ayo Main!
+                    Got It, Let's Play!
                   </button>
                 </div>
               </motion.div>

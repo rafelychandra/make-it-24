@@ -24,7 +24,7 @@ export default function GameControls({
     <div id="game-controls-container" className="flex flex-col gap-3 max-w-2xl mx-auto my-6 px-4">
       {/* Primary Action Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {/* KIRIM JAWABAN (Submit) */}
+        {/* SUBMIT ANSWER */}
         <button
           id="btn-submit-answer"
           onClick={onSubmit}
@@ -36,10 +36,10 @@ export default function GameControls({
           }`}
         >
           <Check className="w-5 h-5" />
-          Kirim Jawaban
+          Submit Answer
         </button>
 
-        {/* TIDAK BISA DIHITUNG (No Solution Assert) */}
+        {/* NO SOLUTION (Assert) */}
         <button
           id="btn-no-solution"
           onClick={onNoSolution}
@@ -51,7 +51,7 @@ export default function GameControls({
           }`}
         >
           <HelpCircle className="w-5 h-5 animate-pulse text-amber-400" />
-          Tidak Bisa Dihitung
+          No Solution
         </button>
       </div>
 
@@ -67,11 +67,11 @@ export default function GameControls({
               : 'text-slate-400 border-slate-800 bg-slate-950 hover:bg-slate-850 hover:border-slate-700 cursor-pointer shadow-sm'
           }`}
         >
-          Reset Formula
+          Clear Formula
         </button>
 
         <span className="text-[10px] text-slate-500 font-mono hidden sm:inline max-w-[280px] text-center uppercase tracking-wider">
-          Gunakan ke-4 angka tepat sekali menjadi 24.
+          Use all 4 numbers once to reach 24.
         </span>
 
         <button
@@ -80,7 +80,7 @@ export default function GameControls({
           className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold font-mono uppercase tracking-wider bg-indigo-950/30 border border-indigo-900/40 text-indigo-300 hover:bg-indigo-950/60 hover:border-indigo-500 transition shadow-sm cursor-pointer hover:shadow"
         >
           <RefreshCw className="w-3.5 h-3.5" />
-          Acak Baru
+          New Deal
         </button>
       </div>
     </div>
